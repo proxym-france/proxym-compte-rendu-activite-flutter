@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 enum NetworkStatus { WIFI, DATA, NONE, UNKOWN }
 
 final connectivityStateProvider =
-    ChangeNotifierProvider<NetworkNotifier>((ref) => NetworkNotifier());
+    Provider((ref) => NetworkNotifier());
 
 class NetworkNotifier extends ChangeNotifier {
   late NetworkStatus lastResult = NetworkStatus.UNKOWN;
