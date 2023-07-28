@@ -1,0 +1,8 @@
+# flow.yaml
+
+appId: com.proxym.mycra.mycra_timesheet_app
+---
+- launchApp
+- tapOn: "next"
+- tapOn: "next"
+- tapOn: "next"
