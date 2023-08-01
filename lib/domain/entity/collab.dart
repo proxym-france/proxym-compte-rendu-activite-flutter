@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:mycra_timesheet_app/core/utils/nameParse.dart';
 import 'package:mycra_timesheet_app/data/models/collab_model.dart';
 
 class Collab extends Equatable {
@@ -14,10 +13,9 @@ class Collab extends Equatable {
   });
 
   factory Collab.fromModel(CollabModel model) {
-    var splitName = model.name.splitName();
     return Collab(
-        firstName: splitName['name'] ?? '',
-        lastName: "${splitName['lastName']} ${splitName['secondLastName']}",
+        firstName: model.name,
+        lastName: model.lastName ?? '',
         email: model.email);
   }
 
