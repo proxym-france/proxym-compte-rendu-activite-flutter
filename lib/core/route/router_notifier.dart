@@ -29,8 +29,8 @@ class GoRouterNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-    set isOnline(bool value) {
-      _isOnline = value;
+  set isOnline(bool value) {
+    _isOnline = value;
     notifyListeners();
   }
 }

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mycra_timesheet_app/domain/usecase/CollabUseCase.dart';
+import 'package:mycra_timesheet_app/domain/entity/collab.dart';
+import 'package:mycra_timesheet_app/domain/usecase/collab_use_case.dart';
 
 class TimeCardList extends ConsumerWidget {
   const TimeCardList({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var allCollabRef = ref.watch(getAllCollabsUseCase);
+    AsyncValue<List<Collab>> allCollabRef = ref.watch(getAllCollabsUseCase);
 
     var colorScheme = Theme.of(context).colorScheme;
     var textTheme = Theme.of(context).textTheme;

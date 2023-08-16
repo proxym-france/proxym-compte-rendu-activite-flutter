@@ -4,9 +4,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:mycra_timesheet_app/core/route/router_notifier.dart';
-import 'package:mycra_timesheet_app/core/route/routes.dart';
 import 'package:mycra_timesheet_app/features/onboarding/widget/image_onboarding.dart';
 
 class OnBoardingPage extends ConsumerStatefulWidget {
