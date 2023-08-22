@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mycra_timesheet_app/core/utils/state.dart';
 import 'package:mycra_timesheet_app/domain/entity/collab.dart';
-import 'package:mycra_timesheet_app/features/time_card/controllers/controller.dart';
+import 'package:mycra_timesheet_app/features/time_card/controllers/timecard_controller.dart';
 import 'package:mycra_timesheet_app/features/time_card/widgets/collab_tile.dart';
 import 'package:mycra_timesheet_app/features/time_card/widgets/short_name_circle_avatar.dart';
 

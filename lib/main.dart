@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mycra_timesheet_app/core/route/route_provider.dart';
 import 'package:mycra_timesheet_app/core/theme/theme_mode_provider.dart';
@@ -27,7 +28,11 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final themeMode = ref.watch(themeModeProvider);
     final router = ref.watch(goRouterProvider);
-
+    final theme = ThemeData(
+      colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      useMaterial3: true,
+    );
+    final darkTheme = ThemeData.dark(useMaterial3: true);
     return MaterialApp.router(
       title: 'Oh Crapp',
       localizationsDelegates: const [
@@ -37,11 +42,8 @@ class MyApp extends ConsumerWidget {
         GlobalWidgetsLocalizations.delegate
       ],
       supportedLocales: S.delegate.supportedLocales,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      darkTheme: ThemeData.dark(useMaterial3: true),
+      theme: theme.copyWith(textTheme: GoogleFonts.montserratTextTheme(theme.textTheme)),
+      darkTheme: darkTheme.copyWith(textTheme: GoogleFonts.montserratTextTheme(darkTheme.textTheme)),
       themeMode: themeMode.themeMode,
       routeInformationParser: router.routeInformationParser,
       routeInformationProvider: router.routeInformationProvider,

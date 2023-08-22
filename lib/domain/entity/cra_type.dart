@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 enum CraType {
   project('Projet', Color(0xFF82B04A)),
   formation('Formation', Color(0xFF82B04A)),
-  paidLeave('Conges', Colors.redAccent),
-  unpaidLeave('Conges sans solde', Colors.redAccent),
-  rTT('RTT', Colors.redAccent),
-  sickLeave('Maladie', Colors.redAccent),
-  exceptional('Exceptionnelle', Colors.redAccent),
+  paidLeave('Conges', Color(0xFFC13926)),
+  unpaidLeave('Conges sans solde', Color(0xFFC13926)),
+  rTT('RTT', Color(0xFFC13926)),
+  sickLeave('Maladie', Color(0xFFC13926)),
+  exceptional('Exceptionnelle', Color(0xFFC13926)),
   holiday('holiday', Color(0xffD38430));
 
   const CraType(this.value, this.color);

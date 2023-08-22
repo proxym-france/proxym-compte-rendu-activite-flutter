@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jiffy/jiffy.dart';
-import 'package:mycra_timesheet_app/features/time_card/controllers/controller.dart';
+import 'package:mycra_timesheet_app/features/time_card/controllers/timecard_controller.dart';
 
 class MonthSelectorWidget extends ConsumerWidget {
   const MonthSelectorWidget({
