@@ -12,4 +12,10 @@ abstract class CollabRepo {
   /// find list of collab by [ids]
   /// Returns only existing [Collab] list otherwise [Empty]
   Future<List<Collab>> findAllByIds(List<String> ids);
+
+  Future<Collab?> getSavedCollab();
+
+  Future<void> saveCurrentCollab(Collab collab);
+
+  Future<void> clearSavedCollab();
 }

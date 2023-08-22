@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mycra_timesheet_app/core/route/router_notifier.dart';
 import 'package:mycra_timesheet_app/core/route/routes.dart';
+import 'package:mycra_timesheet_app/features/authentication/page/authentication_page.dart';
 import 'package:mycra_timesheet_app/features/onboarding/page/OnboardingPage.dart';
 import 'package:mycra_timesheet_app/main.dart';
 
@@ -20,22 +21,26 @@ final goRouterProvider = Provider((ref) {
         child: Text(state.error?.message ?? 'error loading page'),
       ),
     )),
-    redirect: (context, state) {
-      if (!notifier.isOnline) return error.path;
-      return notifier.isLoggedIn ? root.path : onBoarding.path;
+    redirect: (context, state) async {
+      final next = notifier.state;
+      if (!next.isOnline) return error.path;
+      return next.isLoggedIn ? root.path : login.path;
     },
     routes: [
       GoRoute(
         path: root.path,
         name: root.name,
-        pageBuilder: (context, state) =>
-            NoTransitionPage(child: MyHomePage(title: root.displayName)),
+        pageBuilder: (context, state) => NoTransitionPage(child: MyHomePage(title: root.displayName)),
       ),
       GoRoute(
         path: onBoarding.path,
         name: onBoarding.name,
-        pageBuilder: (context, state) =>
-            NoTransitionPage(child: OnBoardingPage()),
+        pageBuilder: (context, state) => NoTransitionPage(child: OnBoardingPage()),
+      ),
+      GoRoute(
+        path: login.path,
+        name: login.name,
+        pageBuilder: (context, state) => NoTransitionPage(child: AuthenticationPage()),
       ),
       GoRoute(
         path: error.path,

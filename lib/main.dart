@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mycra_timesheet_app/core/route/route_provider.dart';
 import 'package:mycra_timesheet_app/core/theme/theme_mode_provider.dart';
+import 'package:mycra_timesheet_app/data/models/type/collab_type.dart';
 import 'package:mycra_timesheet_app/features/time_card/page/time_card_list_page.dart';
 
 import 'generated/l10n.dart';
 
-void main() {
+void main() async {
+  WidgetsBinding binding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: binding);
+  await Hive.initFlutter();
+  Hive.registerAdapter(CollabTypeAdapter());
+
   runApp(const ProviderScope(child: MyApp()));
 }
 
@@ -56,5 +64,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return TimeCardList();
+    // return AuthenticationPage();
   }
 }

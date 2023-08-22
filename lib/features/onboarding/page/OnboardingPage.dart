@@ -35,17 +35,14 @@ class _OnBoardingPageState extends ConsumerState<OnBoardingPage> {
 
   @override
   Widget build(BuildContext context) {
-    final routerNotifier = ref.read(goRouterNotifierProvider);
+    final routerNotifier = ref.read(goRouterNotifierProvider.notifier);
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     var textTheme = Theme.of(context).textTheme;
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
       body: DecoratedBox(
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('assets/images/rm222-mind-14.jpg'),
-                fit: BoxFit.cover)),
+        decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/images/rm222-mind-14.jpg'), fit: BoxFit.cover)),
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
           child: SafeArea(
@@ -60,8 +57,7 @@ class _OnBoardingPageState extends ConsumerState<OnBoardingPage> {
                         DotsIndicator(
                           position: widget._selectedPage % 3,
                           dotsCount: 3,
-                          onTap: (position) =>
-                              widget._pageController.animateToPage(
+                          onTap: (position) => widget._pageController.animateToPage(
                             position,
                             duration: const Duration(milliseconds: 400),
                             curve: Curves.easeIn,
@@ -70,14 +66,11 @@ class _OnBoardingPageState extends ConsumerState<OnBoardingPage> {
                               activeSize: const Size(36, 8),
                               size: const Size(36, 8),
                               activeColor: colorScheme.primary,
-                              activeShape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5)),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5))),
+                              activeShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5))),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(
-                              bottom: 4, left: 32.0, right: 32),
+                          padding: const EdgeInsets.only(bottom: 4, left: 32.0, right: 32),
                           child: Row(
                             children: [
                               if (widget._selectedPage < 2)
@@ -119,32 +112,22 @@ class _OnBoardingPageState extends ConsumerState<OnBoardingPage> {
                                     widget._selectedPage = value;
                                   }),
                               itemBuilder: (context, index) => Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 16.0, right: 32, left: 32),
-                                    child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          ImageOnboarding(
-                                              url:
-                                                  'https://source.unsplash.com/850x1200?professional?$index'),
-                                          SizedBox(
-                                            height: size.height * .075,
-                                          ),
-                                          Text(
-                                            "Operations",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headlineLarge,
-                                          ),
-                                          Text(
-                                            "Manage your timesheet and declare your leaves",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .titleMedium,
-                                            textAlign: TextAlign.center,
-                                          ),
-                                        ]),
+                                    padding: const EdgeInsets.only(top: 16.0, right: 32, left: 32),
+                                    child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+                                      ImageOnboarding(url: 'https://source.unsplash.com/850x1200?professional?$index'),
+                                      SizedBox(
+                                        height: size.height * .075,
+                                      ),
+                                      Text(
+                                        "Operations",
+                                        style: Theme.of(context).textTheme.headlineLarge,
+                                      ),
+                                      Text(
+                                        "Manage your timesheet and declare your leaves",
+                                        style: Theme.of(context).textTheme.titleMedium,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ]),
                                   )),
                         ),
                       ],
@@ -171,23 +154,17 @@ class _OnBoardingPageState extends ConsumerState<OnBoardingPage> {
                                     padding: const EdgeInsets.only(top: 16.0),
                                     child: Center(
                                       child: Column(children: [
-                                        ImageOnboarding(
-                                            url:
-                                                'https://source.unsplash.com/850x1200?professional?$index'),
+                                        ImageOnboarding(url: 'https://source.unsplash.com/850x1200?professional?$index'),
                                         SizedBox(
                                           height: size.height * .075,
                                         ),
                                         Text(
                                           "Operations",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headlineLarge,
+                                          style: Theme.of(context).textTheme.headlineLarge,
                                         ),
                                         Text(
                                           "Manage your timesheet and declare your leaves",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .titleMedium,
+                                          style: Theme.of(context).textTheme.titleMedium,
                                           textAlign: TextAlign.center,
                                         ),
                                       ]),
@@ -212,27 +189,20 @@ class _OnBoardingPageState extends ConsumerState<OnBoardingPage> {
                                   DotsIndicator(
                                     position: widget._selectedPage % 3,
                                     dotsCount: 3,
-                                    onTap: (position) =>
-                                        widget._pageController.animateToPage(
+                                    onTap: (position) => widget._pageController.animateToPage(
                                       position,
-                                      duration:
-                                          const Duration(milliseconds: 400),
+                                      duration: const Duration(milliseconds: 400),
                                       curve: Curves.easeIn,
                                     ),
                                     decorator: DotsDecorator(
                                         activeSize: const Size(36, 8),
                                         size: const Size(36, 8),
                                         activeColor: colorScheme.primary,
-                                        activeShape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(5)),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(5))),
+                                        activeShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5))),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(
-                                        bottom: 4, left: 32.0, right: 32),
+                                    padding: const EdgeInsets.only(bottom: 4, left: 32.0, right: 32),
                                     child: Row(
                                       children: [
                                         if (widget._selectedPage < 2)
@@ -244,8 +214,7 @@ class _OnBoardingPageState extends ConsumerState<OnBoardingPage> {
                                           child: ElevatedButton(
                                             onPressed: () {
                                               setState(() {
-                                                onNextClicked(
-                                                    context, routerNotifier);
+                                                onNextClicked(context, routerNotifier);
                                               });
                                             },
                                             child: const Text('next'),
@@ -345,10 +314,7 @@ class _OnBoardingPageState extends ConsumerState<OnBoardingPage> {
 
   void onNextClicked(BuildContext context, GoRouterNotifier routerNotifier) {
     if (widget._selectedPage < 2) {
-      widget._pageController.nextPage(
-          duration: const Duration(milliseconds: 400), curve: Curves.easeIn);
-    } else {
-      routerNotifier.isLoggedIn = true;
+      widget._pageController.nextPage(duration: const Duration(milliseconds: 400), curve: Curves.easeIn);
     }
   }
 }
@@ -367,13 +333,10 @@ class OnBoardingPageViewItem extends StatelessWidget {
           Breakpoints.small: SlotLayout.from(
             key: const Key("Onboard small"),
             builder: (context) => Padding(
-              padding:
-                  const EdgeInsets.only(top: 16.0, left: 48.0, right: 48.0),
+              padding: const EdgeInsets.only(top: 16.0, left: 48.0, right: 48.0),
               child: Center(
                 child: Column(children: [
-                  ImageOnboarding(
-                      url:
-                          'https://source.unsplash.com/850x1200?professional?$index'),
+                  ImageOnboarding(url: 'https://source.unsplash.com/850x1200?professional?$index'),
                   SizedBox(
                     height: size.height * .075,
                   ),
@@ -396,8 +359,7 @@ class OnBoardingPageViewItem extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 48),
               child: Center(
                 child: ImageOnboarding(
-                  url:
-                      'https://source.unsplash.com/850x1200?professional?$index',
+                  url: 'https://source.unsplash.com/850x1200?professional?$index',
                 ),
               ),
             ),

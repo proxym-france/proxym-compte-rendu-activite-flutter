@@ -1,17 +1,14 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 enum NetworkStatus { WIFI, DATA, NONE, UNKOWN }
 
-final connectivityStateProvider =
-    Provider((ref) => NetworkNotifier());
+final connectivityStateProvider = StateNotifierProvider<NetworkNotifier, NetworkStatus>((ref) => NetworkNotifier());
 
-class NetworkNotifier extends ChangeNotifier {
-  late NetworkStatus lastResult = NetworkStatus.UNKOWN;
+class NetworkNotifier extends StateNotifier<NetworkStatus> {
   late NetworkStatus newState;
 
-  NetworkNotifier() {
+  NetworkNotifier() : super(NetworkStatus.UNKOWN) {
     Connectivity().onConnectivityChanged.listen((ConnectivityResult event) {
       switch (event) {
         case ConnectivityResult.wifi:
@@ -27,12 +24,9 @@ class NetworkNotifier extends ChangeNotifier {
           newState = NetworkStatus.UNKOWN;
           break;
       }
-      if(newState != lastResult){
-        lastResult = newState;
-        notifyListeners();
-
+      if (newState != state) {
+        state = newState;
       }
     });
-
   }
 }

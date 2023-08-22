@@ -1,36 +1,75 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mycra_timesheet_app/core/di/provider.dart';
 import 'package:mycra_timesheet_app/core/network/network_notifier.dart';
+import 'package:mycra_timesheet_app/domain/entity/collab.dart';
+import 'package:mycra_timesheet_app/domain/repository/collab_repo.dart';
 
-final goRouterNotifierProvider = Provider((ref) {
-  return GoRouterNotifier(ref);
+final goRouterNotifierProvider = ChangeNotifierProvider<GoRouterNotifier>((ref) {
+  return GoRouterNotifier(ref, ref.read(collabRepoProvider))..init();
 });
 
 class GoRouterNotifier extends ChangeNotifier {
-  bool _isLoggedIn = false;
-  late bool _isOnline;
-  late NetworkNotifier networkProvider;
+  final ChangeNotifierProviderRef ref;
+  late RouterStateModel state;
 
-  GoRouterNotifier(ProviderRef ref) {
-    networkProvider = ref.watch(connectivityStateProvider);
-    isOnline = NetworkStatus.NONE != networkProvider.lastResult;
+  GoRouterNotifier(this.ref, this.collabRepo);
 
-    networkProvider.addListener(() {
-      isOnline = NetworkStatus.NONE != networkProvider.lastResult;
+  final CollabRepo collabRepo;
+
+  Future<void> init() async {
+    state = RouterStateModel.initial();
+    state = state.copyWith(isOnline: ref.watch(connectivityStateProvider) != NetworkStatus.NONE);
+
+    await checkIsLoggedIn();
+  }
+
+  Future<void> checkIsLoggedIn() async {
+    await collabRepo.getSavedCollab().then((value) {
+      state = state.copyWith(isLoggedIn: value != null, isAdmin: value?.isAdmin, activeUser: value);
+      FlutterNativeSplash.remove();
+      print('collab was fetch : $value');
+
+      return notifyListeners();
+    }).onError((error, stackTrace) {
+      print(error);
+      state = state.copyWith(isLoggedIn: false, isAdmin: false, activeUser: null);
+      return notifyListeners();
     });
   }
+}
 
-  bool get isLoggedIn => _isLoggedIn;
+class RouterStateModel {
+  final bool isOnline;
+  final bool isLoggedIn;
+  final bool isAdmin;
+  final Collab? activeUser;
 
-  bool get isOnline => _isOnline;
+  RouterStateModel({
+    required this.isOnline,
+    required this.isLoggedIn,
+    required this.isAdmin,
+    this.activeUser,
+  });
 
-  set isLoggedIn(bool value) {
-    _isLoggedIn = value;
-    notifyListeners();
-  }
+  RouterStateModel.initial({
+    this.isOnline = false,
+    this.isLoggedIn = false,
+    this.isAdmin = false,
+    this.activeUser,
+  });
 
-  set isOnline(bool value) {
-    _isOnline = value;
-    notifyListeners();
-  }
+  RouterStateModel copyWith({
+    bool? isOnline,
+    bool? isLoggedIn,
+    bool? isAdmin,
+    Collab? activeUser,
+  }) =>
+      RouterStateModel(
+        isOnline: isOnline ?? this.isOnline,
+        isLoggedIn: isLoggedIn ?? this.isLoggedIn,
+        isAdmin: isAdmin ?? this.isAdmin,
+        activeUser: activeUser ?? this.activeUser,
+      );
 }

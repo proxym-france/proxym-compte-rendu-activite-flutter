@@ -1,1 +1,10 @@
-{}
+{
+  "@@local": "fr",
+  "craTypes": "{craType, select, project{Projet} formation{Formation} paidLeave{Congé payé} unpaidLeave{Congé sans solde} rTT{RTT} sickLeave{Maladie} exceptional{Exceptionelle}  holiday{Jour Férié}}",
+  "@craTypes": {
+    "placeholders": {
+      "craType": {}
+    }
+  }
+
+}

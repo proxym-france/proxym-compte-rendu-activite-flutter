@@ -49,6 +49,26 @@ class S {
   static S? maybeOf(BuildContext context) {
     return Localizations.of<S>(context, S);
   }
+
+  /// `{craType, select, project{Project} formation{Formation} paidLeave{Paid leave} unpaidLeave{Unpaid leave} rTT{RTT} sickLeave{Sick Leave} exceptional{Exceptional}  holiday{Holiday}}`
+  String craTypes(Object craType) {
+    return Intl.select(
+      craType,
+      {
+        'project': 'Project',
+        'formation': 'Formation',
+        'paidLeave': 'Paid leave',
+        'unpaidLeave': 'Unpaid leave',
+        'rTT': 'RTT',
+        'sickLeave': 'Sick Leave',
+        'exceptional': 'Exceptional',
+        'holiday': 'Holiday',
+      },
+      name: 'craTypes',
+      desc: '',
+      args: [craType],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -10,4 +10,7 @@ abstract class CollabRemoteDataSource {
 
   @GET('/collab/all')
   Future<List<CollabModel>> getAllCollabs();
+
+  @GET('/collab/ids')
+  Future<List<CollabModel>> getCollabByIds(@Query('ids') String ids);
 }
