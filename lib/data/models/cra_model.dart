@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:jiffy/jiffy.dart';
 import 'package:mycra_timesheet_app/data/models/absence_model.dart';
 import 'package:mycra_timesheet_app/data/models/activity_model.dart';
 import 'package:mycra_timesheet_app/data/models/collab_model.dart';
@@ -9,6 +10,7 @@ class CraModel {
   final List<HolidayModel> holidays;
   final List<AbsenceModel> absences;
   final List<ActivityModel> activites;
+  final List<DateTime> available;
   final int etat;
   final String status;
   final int id;
@@ -21,6 +23,7 @@ class CraModel {
     required this.holidays,
     required this.absences,
     required this.activites,
+    required this.available,
     required this.etat,
     required this.status,
     required this.id,
@@ -46,6 +49,7 @@ class CraModel {
         holidays: holidays ?? this.holidays,
         absences: absences ?? this.absences,
         activites: activites ?? this.activites,
+        available: available ?? this.available,
         etat: etat ?? this.etat,
         status: status ?? this.status,
         id: id ?? this.id,
@@ -55,18 +59,15 @@ class CraModel {
         collab: collab ?? this.collab,
       );
 
-  factory CraModel.fromRawJson(String str) =>
-      CraModel.fromJson(json.decode(str));
+  factory CraModel.fromRawJson(String str) => CraModel.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
   factory CraModel.fromJson(Map<String, dynamic> json) => CraModel(
-        holidays: List<HolidayModel>.from(
-            json["_holidays"].map((x) => HolidayModel.fromJson(x))),
-        absences: List<AbsenceModel>.from(
-            json["_absences"].map((x) => AbsenceModel.fromJson(x))),
-        activites: List<ActivityModel>.from(
-            json["_activites"].map((x) => ActivityModel.fromJson(x))),
+        holidays: List<HolidayModel>.from(json["_holidays"].map((x) => HolidayModel.fromJson(x))),
+        absences: List<AbsenceModel>.from(json["_absences"].map((x) => AbsenceModel.fromJson(x))),
+        activites: List<ActivityModel>.from(json["_activites"].map((x) => ActivityModel.fromJson(x))),
+        available: List<DateTime>.from(json["availableDates"].map((x) => Jiffy.parse(x).dateTime)),
         etat: json["_etat"],
         status: json["_status"],
         id: json["_id"],

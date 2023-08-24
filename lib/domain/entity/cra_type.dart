@@ -8,7 +8,8 @@ enum CraType {
   rTT('RTT', Color(0xFFC13926)),
   sickLeave('Maladie', Color(0xFFC13926)),
   exceptional('Exceptionnelle', Color(0xFFC13926)),
-  holiday('holiday', Color(0xffD38430));
+  holiday('holiday', Color(0xffD38430)),
+  blank('blank', Color(0xff878787));
 
   const CraType(this.value, this.color);
 

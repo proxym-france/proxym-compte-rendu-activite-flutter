@@ -1,1 +1,1 @@
-fvm flutter pub run build_runner watch -d
+fvm flutter pub run build_runner build -d

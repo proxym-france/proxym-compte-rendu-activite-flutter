@@ -9,6 +9,5 @@ abstract class CraRemoteDataSource {
   factory CraRemoteDataSource(Dio dio) => _CraRemoteDataSource(dio);
 
   @GET('/cra/get/{user}/{month}/{year}')
-  Future<CraModel> getCurrentCraPerUser(
-      @Path() String user, @Path() int month, @Path() int year);
+  Future<CraModel> getCurrentCraPerUser(@Path() String user, @Path() int month, @Path() int year);
 }

@@ -1,6 +1,6 @@
 {
   "@@local": "en",
-  "craTypes": "{craType, select, project{Project} formation{Formation} paidLeave{Paid leave} unpaidLeave{Unpaid leave} rTT{RTT} sickLeave{Sick Leave} exceptional{Exceptional}  holiday{Holiday}}",
+  "craTypes": "{craType, select, project{Project} formation{Formation} paidLeave{Paid leave} unpaidLeave{Unpaid leave} rTT{RTT} sickLeave{Sick Leave} exceptional{Exceptional}  holiday{Holiday} blank{Not Filled}}",
   "@craTypes": {
     "placeholders": {
       "craType": {}

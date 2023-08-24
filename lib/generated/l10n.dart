@@ -50,7 +50,7 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `{craType, select, project{Project} formation{Formation} paidLeave{Paid leave} unpaidLeave{Unpaid leave} rTT{RTT} sickLeave{Sick Leave} exceptional{Exceptional}  holiday{Holiday}}`
+  /// `{craType, select, project{Project} formation{Formation} paidLeave{Paid leave} unpaidLeave{Unpaid leave} rTT{RTT} sickLeave{Sick Leave} exceptional{Exceptional}  holiday{Holiday} blank{Not Filled}}`
   String craTypes(Object craType) {
     return Intl.select(
       craType,
@@ -63,6 +63,7 @@ class S {
         'sickLeave': 'Sick Leave',
         'exceptional': 'Exceptional',
         'holiday': 'Holiday',
+        'blank': 'Not Filled',
       },
       name: 'craTypes',
       desc: '',

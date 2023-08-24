@@ -29,6 +29,7 @@ class MessageLookup extends MessageLookupByLibrary {
             'sickLeave': 'Sick Leave',
             'exceptional': 'Exceptional',
             'holiday': 'Holiday',
+            'blank': 'Not Filled',
           })}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);

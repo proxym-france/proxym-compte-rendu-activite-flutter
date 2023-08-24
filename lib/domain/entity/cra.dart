@@ -16,6 +16,12 @@ class Cra extends Equatable {
   final CraType type;
   final DateTime date;
 
+  Map<String, dynamic> toJson() => {
+        "title": title,
+        "type": type.value,
+        "date": date.toIso8601String(),
+      };
+
   Cra(this.title, this.type, this.date);
 
   //todo update project model
@@ -26,26 +32,17 @@ class Cra extends Equatable {
 
   factory Cra.fromHoliday(HolidayModel model) => Cra(model.name, CraType.holiday, DateUtils.dateOnly(model.date));
 
+  factory Cra.fromAvailable(DateTime date) => Cra('Available', CraType.blank, DateUtils.dateOnly(date));
+
   static List<CraCardModel> fromModel(CraModel model) {
     final Map<DateTime, List<Cra>> data = [
       ...model.activites.map((e) => Cra.fromActivity(e)).toList(),
       ...model.absences.map((e) => Cra.fromLeave(e)).toList(),
       ...model.holidays.map((e) => Cra.fromHoliday(e)).toList(),
+      ...model.available.map((e) => Cra.fromAvailable(e)).toList(),
     ].groupListsBy((element) => element.date).map((key, value) => MapEntry(key, value.toSet().toList()));
 
-    final List<CraCardModel> result = [];
-    data.values.forEachIndexedWhile(
-      (index, element) {
-        if (result.isEmpty || element.length > 1 || result.last.title != element[0].title) {
-          result.addAll(element.map((e) => CraCardModel(title: e.title, type: e.type, range: DateTimeRange(start: e.date, end: e.date))));
-        } else {
-          result.last.extendRange(1);
-        }
-        return true;
-      },
-    );
-    return result..sortBy((element) => element.range.end);
-    // return data.values.flattened.sortedBy((element) => element.date).toList();
+    return CraCardModel.mapToCraCardModel(data.values.flattened.toSet());
   }
 
   @override

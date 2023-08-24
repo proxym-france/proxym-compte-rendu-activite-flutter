@@ -8,6 +8,7 @@ import 'package:mycra_timesheet_app/core/route/route_provider.dart';
 import 'package:mycra_timesheet_app/core/theme/theme_mode_provider.dart';
 import 'package:mycra_timesheet_app/data/models/type/collab_type.dart';
 import 'package:mycra_timesheet_app/features/time_card/page/time_card_list_page.dart';
+import 'package:stack_trace/stack_trace.dart' as stack_trace;
 
 import 'generated/l10n.dart';
 
@@ -18,6 +19,11 @@ void main() async {
   Hive.registerAdapter(CollabTypeAdapter());
 
   runApp(const ProviderScope(child: MyApp()));
+  FlutterError.demangleStackTrace = (StackTrace stack) {
+    if (stack is stack_trace.Trace) return stack.vmTrace;
+    if (stack is stack_trace.Chain) return stack.toTrace().vmTrace;
+    return stack;
+  };
 }
 
 class MyApp extends ConsumerWidget {
