@@ -20,7 +20,14 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'fr';
 
-  static String m0(craType) => "${Intl.select(craType, {
+  static String m0(craFilters) => "${Intl.select(craFilters, {
+            'all': 'Tous',
+            'notFilled': 'Non Rempli',
+            'activity': 'Activité',
+            'leave': 'Congé',
+          })}";
+
+  static String m1(craType) => "${Intl.select(craType, {
             'project': 'Projet',
             'formation': 'Formation',
             'paidLeave': 'Congé payé',
@@ -34,5 +41,5 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) =>
-      <String, Function>{"craTypes": m0};
+      <String, Function>{"craFilters": m0, "craTypes": m1};
 }

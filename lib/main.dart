@@ -40,6 +40,7 @@ class MyApp extends ConsumerWidget {
     );
     final darkTheme = ThemeData.dark(useMaterial3: true);
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       title: 'Oh Crapp',
       localizationsDelegates: const [
         S.delegate,

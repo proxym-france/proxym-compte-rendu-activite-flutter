@@ -37,6 +37,7 @@ class CraModel {
     List<HolidayModel>? holidays,
     List<AbsenceModel>? absences,
     List<ActivityModel>? activites,
+    List<DateTime>? available,
     int? etat,
     String? status,
     int? id,

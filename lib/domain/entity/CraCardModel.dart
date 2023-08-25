@@ -13,18 +13,18 @@ class CraCardModel extends Equatable {
 
   factory CraCardModel.fromCra(Cra cra) => CraCardModel(title: cra.title, type: cra.type, range: DateTimeRange(start: cra.date, end: cra.date));
 
-  static List<CraCardModel> mapToCraCardModel(Set<Cra> cras) {
+  static List<CraCardModel> mapToCraCardModel(List<List<Cra>> cras) {
     final List<CraCardModel> result = [];
-    cras.sortedBy((element) => element.date).forEachIndexed(
+    cras.forEachIndexed(
       (index, element) {
-        if (result.isEmpty) {
-          result.add(CraCardModel.fromCra(element));
+        if (result.isEmpty || element.length > 1) {
+          result.addAll(element.map((e) => CraCardModel.fromCra(e)));
         } else {
           var last = result.last;
-          if (last.title == element.title && element.date.difference(last.range.end).inDays == 1) {
+          if (last.title == element[0].title && element[0].date.difference(last.range.end).inDays == 1) {
             last.extendRange(1);
           } else {
-            result.add(CraCardModel.fromCra(element));
+            result.add(CraCardModel.fromCra(element[0]));
           }
         }
       },

@@ -70,6 +70,22 @@ class S {
       args: [craType],
     );
   }
+
+  /// `{craFilters, select, all{All} notFilled{Not Filled} activity{Activity} leave{Leave}}`
+  String craFilters(Object craFilters) {
+    return Intl.select(
+      craFilters,
+      {
+        'all': 'All',
+        'notFilled': 'Not Filled',
+        'activity': 'Activity',
+        'leave': 'Leave',
+      },
+      name: 'craFilters',
+      desc: '',
+      args: [craFilters],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

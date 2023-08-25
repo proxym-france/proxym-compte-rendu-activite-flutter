@@ -8,10 +8,7 @@ import 'package:mycra_timesheet_app/features/time_card/widgets/month_selector.da
 class TimeCardFilters extends ConsumerWidget {
   const TimeCardFilters({
     super.key,
-    required this.shouldShowCollab,
   });
-
-  final bool shouldShowCollab;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -20,6 +17,7 @@ class TimeCardFilters extends ConsumerWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       mainAxisSize: MainAxisSize.min,
       children: [
+        //todo add filter;
         const SizedBox(
           height: 60,
           child: FilterChips(),

@@ -40,9 +40,9 @@ class Cra extends Equatable {
       ...model.absences.map((e) => Cra.fromLeave(e)).toList(),
       ...model.holidays.map((e) => Cra.fromHoliday(e)).toList(),
       ...model.available.map((e) => Cra.fromAvailable(e)).toList(),
-    ].groupListsBy((element) => element.date).map((key, value) => MapEntry(key, value.toSet().toList()));
-
-    return CraCardModel.mapToCraCardModel(data.values.flattened.toSet());
+    ].groupListsBy((element) => element.date);
+    data;
+    return CraCardModel.mapToCraCardModel(data.values.map((e) => e.toSet().toList()).toList().sortedBy((element) => element[0].date));
   }
 
   @override

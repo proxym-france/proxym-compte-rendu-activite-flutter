@@ -19,9 +19,3 @@ class Loading<T> extends State<T> {
 }
 
 class Initial<T> extends State<T> {}
-
-class Refreshing<T> extends State<T> {
-  final T data;
-
-  Refreshing(this.data);
-}

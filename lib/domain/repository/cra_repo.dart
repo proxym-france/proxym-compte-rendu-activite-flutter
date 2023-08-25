@@ -1,5 +1,5 @@
-import 'package:mycra_timesheet_app/domain/entity/CraCardModel.dart';
+import 'package:mycra_timesheet_app/domain/entity/Timecard.dart';
 
 abstract class CraRepo {
-  Future<List<CraCardModel>> fetchCurrentCraPerMonth(String user, int month, int year);
+  Future<TimeCard> fetchCurrentCraPerMonth(String user, int month, int year);
 }

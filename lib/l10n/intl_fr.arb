@@ -5,6 +5,12 @@
     "placeholders": {
       "craType": {}
     }
+  },
+  "craFilters": "{craFilters, select, all{Tous} notFilled{Non Rempli} activity{Activité} leave{Congé}}",
+  "@craFilters": {
+    "placeholders": {
+      "craFilters": {}
+    }
   }
 
 }
