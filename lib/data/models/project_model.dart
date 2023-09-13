@@ -1,35 +1,41 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
-import 'package:mycra_timesheet_app/data/models/collab_model.dart';
-import 'package:mycra_timesheet_app/domain/entity/project.dart';
 
 class ProjectModel extends Equatable {
   final String code;
-  final List<CollabModel> collabs;
+  final String name;
+  final String client;
 
   const ProjectModel({
     required this.code,
-    required this.collabs,
+    required this.name,
+    required this.client,
   });
 
   factory ProjectModel.fromRawJson(String str) => ProjectModel.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory ProjectModel.fromJson(Map<String, dynamic> json) => ProjectModel(
-        code: json["_code"],
-        collabs: List<CollabModel>.from(json["_collabs"].map((x) => CollabModel.fromJson(x))),
-      );
+  factory ProjectModel.fromJson(Map<String, dynamic> json) {
+    return ProjectModel(
+      code: json["_code"],
+      name: json["_name"],
+      client: json["_client"],
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         "_code": code,
-        "_collabs": List<dynamic>.from(collabs.map((x) => x.toJson())),
+        "_name": name,
+        "_client": client,
       };
 
-  factory ProjectModel.fromProject(Project project) =>
-      ProjectModel(code: project.code, collabs: project.collabs.map((e) => CollabModel.fromCollab(e)).toList());
+/*
+  factory ProjectModel.fromProject(Project project) => ProjectModel(
+        code: project.code, name: project.,
+      );*/
 
   @override
-  List<Object?> get props => [code, collabs];
+  List<Object?> get props => [code, name, client];
 }

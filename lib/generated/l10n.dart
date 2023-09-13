@@ -86,6 +86,116 @@ class S {
       args: [craFilters],
     );
   }
+
+  /// `Save`
+  String get save {
+    return Intl.message(
+      'Save',
+      name: 'save',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Date`
+  String get selectDate {
+    return Intl.message(
+      'Select Date',
+      name: 'selectDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select an activity`
+  String get selectAnActivity {
+    return Intl.message(
+      'Select an activity',
+      name: 'selectAnActivity',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Activity`
+  String get addActivity {
+    return Intl.message(
+      'Add Activity',
+      name: 'addActivity',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fill Cra`
+  String get fillCra {
+    return Intl.message(
+      'Fill Cra',
+      name: 'fillCra',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unkown Error`
+  String get unkownError {
+    return Intl.message(
+      'Unkown Error',
+      name: 'unkownError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password`
+  String get password {
+    return Intl.message(
+      'Password',
+      name: 'password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `please provide a password`
+  String get pleaseProvideAPassword {
+    return Intl.message(
+      'please provide a password',
+      name: 'pleaseProvideAPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Check your email`
+  String get checkYourEmail {
+    return Intl.message(
+      'Check your email',
+      name: 'checkYourEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `xxx@proxym-it.com or xxx@proxym.fr`
+  String get mailPlaceHolder {
+    return Intl.message(
+      'xxx@proxym-it.com or xxx@proxym.fr',
+      name: 'mailPlaceHolder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Available`
+  String get available {
+    return Intl.message(
+      'Available',
+      name: 'available',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

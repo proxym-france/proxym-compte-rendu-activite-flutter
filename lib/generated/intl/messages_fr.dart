@@ -40,6 +40,24 @@ class MessageLookup extends MessageLookupByLibrary {
           })}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-  static Map<String, Function> _notInlinedMessages(_) =>
-      <String, Function>{"craFilters": m0, "craTypes": m1};
+  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "addActivity":
+            MessageLookupByLibrary.simpleMessage("Ajouter une activité"),
+        "available": MessageLookupByLibrary.simpleMessage("Disponible"),
+        "checkYourEmail":
+            MessageLookupByLibrary.simpleMessage("Vérifiez votre email"),
+        "craFilters": m0,
+        "craTypes": m1,
+        "fillCra": MessageLookupByLibrary.simpleMessage("Remplisser CRA"),
+        "mailPlaceHolder": MessageLookupByLibrary.simpleMessage(
+            "xxx@proxym-it.com or xxx@proxym.fr"),
+        "password": MessageLookupByLibrary.simpleMessage("Mot de passe"),
+        "pleaseProvideAPassword": MessageLookupByLibrary.simpleMessage(
+            "veuillez fournir un mot de passe"),
+        "save": MessageLookupByLibrary.simpleMessage("Sauvegarder"),
+        "selectAnActivity":
+            MessageLookupByLibrary.simpleMessage("Sélectionner une activité"),
+        "selectDate": MessageLookupByLibrary.simpleMessage("Sélectionner Date"),
+        "unkownError": MessageLookupByLibrary.simpleMessage("Erreur inconnue")
+      };
 }

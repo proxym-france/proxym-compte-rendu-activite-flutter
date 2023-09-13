@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mycra_timesheet_app/core/route/router_notifier.dart';
+import 'package:mycra_timesheet_app/core/route/routes.dart';
+import 'package:mycra_timesheet_app/core/utils/date_extensions.dart';
 import 'package:mycra_timesheet_app/core/utils/state.dart';
-import 'package:mycra_timesheet_app/domain/entity/CraCardModel.dart';
+import 'package:mycra_timesheet_app/domain/entity/cra_card_model.dart';
+import 'package:mycra_timesheet_app/domain/entity/cra_type.dart';
 import 'package:mycra_timesheet_app/features/time_card/controllers/timecard_controller.dart';
 import 'package:mycra_timesheet_app/features/time_card/widgets/timecard_filter.dart';
 import 'package:mycra_timesheet_app/features/time_card/widgets/timecard_item_widget.dart';
+import 'package:mycra_timesheet_app/generated/l10n.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class TimeCardList extends ConsumerStatefulWidget {
   const TimeCardList({super.key});
@@ -15,8 +21,6 @@ class TimeCardList extends ConsumerStatefulWidget {
 }
 
 class TimeCardListState extends ConsumerState<TimeCardList> {
-  var brightness;
-
   @override
   void initState() {
     super.initState();
@@ -46,10 +50,18 @@ class TimeCardListState extends ConsumerState<TimeCardList> {
         ),
         bottom: (routerNotifier.state.isAdmin && timeCardNotifier.collabs is Success) || (!routerNotifier.state.isAdmin)
             ? PreferredSize(
-                preferredSize: const Size.fromHeight(56 * 2),
+                preferredSize: Size.fromHeight(56 * (routerNotifier.state.isAdmin ? 3 : 2)),
                 child: TimeCardFilters(key: filterKey),
               )
             : null,
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          context.goNamed(createActivity.name,
+              pathParameters: {"firstDayOfWeek": timeCardNotifier.selectedDate.atFirstDayOfTheMonth().toIso8601String()});
+        },
+        label: Text(S.of(context).fillCra),
+        icon: const Icon(Icons.add),
       ),
       body: RefreshIndicator(
         onRefresh: () {
@@ -60,17 +72,26 @@ class TimeCardListState extends ConsumerState<TimeCardList> {
               child: ListView.builder(
                 itemCount: craModel.length,
                 itemBuilder: (context, index) => CraCardWidget(
-                  projectName: craModel[index].title,
-                  type: craModel[index].type,
-                  period: craModel[index].range,
-                ),
+                    projectName: (craModel[index].title == "Available") ? S.of(context).available : craModel[index].title,
+                    type: craModel[index].type,
+                    period: craModel[index].range,
+                    percentage: craModel[index].percentage),
               ),
             ),
           Error(error: var error) => SingleChildScrollView(
-              child: ErrorWidget(error ?? Exception('Unkown Error')),
+              child: ErrorWidget(error ?? Exception(S.of(context).unkownError)),
             ),
-          _ => const Center(
-              child: CircularProgressIndicator(),
+          _ => Skeletonizer(
+              enabled: true,
+              child: ListView.builder(
+                itemCount: 7,
+                itemBuilder: (context, index) => CraCardWidget(
+                  projectName: S.of(context).craTypes(CraType.blank),
+                  type: CraType.blank,
+                  period: DateTimeRange(start: DateTime.now(), end: DateTime.now()),
+                  percentage: 0,
+                ),
+              ),
             ),
         },
       ),

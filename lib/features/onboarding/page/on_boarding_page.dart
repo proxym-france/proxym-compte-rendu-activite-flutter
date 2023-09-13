@@ -8,29 +8,22 @@ import 'package:mycra_timesheet_app/core/route/router_notifier.dart';
 import 'package:mycra_timesheet_app/features/onboarding/widget/image_onboarding.dart';
 
 class OnBoardingPage extends ConsumerStatefulWidget {
-  OnBoardingPage({super.key});
-
-  late int _selectedPage;
-  late PageController _pageController;
+  const OnBoardingPage({super.key});
 
   @override
   ConsumerState<OnBoardingPage> createState() => _OnBoardingPageState();
 }
 
 class _OnBoardingPageState extends ConsumerState<OnBoardingPage> {
+  late int _selectedPage;
+  late PageController _pageController;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    widget._selectedPage = 0;
-    widget._pageController = PageController(viewportFraction: 1.1);
-  }
-
-  @override
-  void didUpdateWidget(OnBoardingPage oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    widget._selectedPage = oldWidget._selectedPage;
-    widget._pageController = oldWidget._pageController;
+    _selectedPage = 0;
+    _pageController = PageController(viewportFraction: 1.1);
   }
 
   @override
@@ -55,9 +48,9 @@ class _OnBoardingPageState extends ConsumerState<OnBoardingPage> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         DotsIndicator(
-                          position: widget._selectedPage % 3,
+                          position: _selectedPage % 3,
                           dotsCount: 3,
-                          onTap: (position) => widget._pageController.animateToPage(
+                          onTap: (position) => _pageController.animateToPage(
                             position,
                             duration: const Duration(milliseconds: 400),
                             curve: Curves.easeIn,
@@ -73,7 +66,7 @@ class _OnBoardingPageState extends ConsumerState<OnBoardingPage> {
                           padding: const EdgeInsets.only(bottom: 4, left: 32.0, right: 32),
                           child: Row(
                             children: [
-                              if (widget._selectedPage < 2)
+                              if (_selectedPage < 2)
                                 TextButton(
                                   onPressed: () {},
                                   child: const Text('skip'),
@@ -107,9 +100,9 @@ class _OnBoardingPageState extends ConsumerState<OnBoardingPage> {
                           fit: FlexFit.tight,
                           child: PageView.builder(
                               itemCount: 3,
-                              controller: widget._pageController,
+                              controller: _pageController,
                               onPageChanged: (value) => setState(() {
-                                    widget._selectedPage = value;
+                                    _selectedPage = value;
                                   }),
                               itemBuilder: (context, index) => Padding(
                                     padding: const EdgeInsets.only(top: 16.0, right: 32, left: 32),
@@ -146,9 +139,9 @@ class _OnBoardingPageState extends ConsumerState<OnBoardingPage> {
                           fit: FlexFit.tight,
                           child: PageView.builder(
                               itemCount: 3,
-                              controller: widget._pageController,
+                              controller: _pageController,
                               onPageChanged: (value) => setState(() {
-                                    widget._selectedPage = value;
+                                    _selectedPage = value;
                                   }),
                               itemBuilder: (context, index) => Padding(
                                     padding: const EdgeInsets.only(top: 16.0),
@@ -187,9 +180,9 @@ class _OnBoardingPageState extends ConsumerState<OnBoardingPage> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   DotsIndicator(
-                                    position: widget._selectedPage % 3,
+                                    position: _selectedPage % 3,
                                     dotsCount: 3,
-                                    onTap: (position) => widget._pageController.animateToPage(
+                                    onTap: (position) => _pageController.animateToPage(
                                       position,
                                       duration: const Duration(milliseconds: 400),
                                       curve: Curves.easeIn,
@@ -205,7 +198,7 @@ class _OnBoardingPageState extends ConsumerState<OnBoardingPage> {
                                     padding: const EdgeInsets.only(bottom: 4, left: 32.0, right: 32),
                                     child: Row(
                                       children: [
-                                        if (widget._selectedPage < 2)
+                                        if (_selectedPage < 2)
                                           TextButton(
                                             onPressed: () {},
                                             child: const Text('skip'),
@@ -234,87 +227,11 @@ class _OnBoardingPageState extends ConsumerState<OnBoardingPage> {
         ),
       ),
     );
-
-/*
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Flexible(
-              fit: FlexFit.tight,
-              child: PageView.builder(
-                itemCount: 3,
-                controller: widget._pageController,
-                onPageChanged: (value) => setState(() {
-                  widget._selectedPage = value;
-                }),
-                itemBuilder: (context, index) => OnBoardingPageViewItem(
-                  index: index,
-                ),
-              ),
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                DotsIndicator(
-                  position: widget._selectedPage % 3,
-                  dotsCount: 3,
-                  onTap: (position) => widget._pageController.animateToPage(
-                    position,
-                    duration: const Duration(milliseconds: 400),
-                    curve: Curves.easeIn,
-                  ),
-                  decorator: DotsDecorator(
-                      activeSize: const Size(36, 8),
-                      size: const Size(36, 8),
-                      activeColor: colorScheme.primary,
-                      activeShape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5)),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5))),
-                ),
-                SizedBox(
-                  height: size.height * .02,
-                ),
-                if (size.height > 600)
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(bottom: 4, left: 32.0, right: 32),
-                    child: Row(
-                      children: [
-                        if (widget._selectedPage < 2)
-                          TextButton(
-                            onPressed: () {},
-                            child: const Text('skip'),
-                          ),
-                        Expanded(
-                          child: ElevatedButton(
-                            onPressed: () {
-                              setState(() {
-                                widget._pageController.nextPage(
-                                    duration: const Duration(milliseconds: 400),
-                                    curve: Curves.easeIn);
-                              });
-                            },
-                            child: const Text('next'),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-              ],
-            )
-          ],
-        ),
-      ),
-    );
-*/
   }
 
   void onNextClicked(BuildContext context, GoRouterNotifier routerNotifier) {
-    if (widget._selectedPage < 2) {
-      widget._pageController.nextPage(duration: const Duration(milliseconds: 400), curve: Curves.easeIn);
+    if (_selectedPage < 2) {
+      _pageController.nextPage(duration: const Duration(milliseconds: 400), curve: Curves.easeIn);
     }
   }
 }

@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mycra_timesheet_app/core/utils/state.dart';
 import 'package:mycra_timesheet_app/features/authentication/controller/authentication_controller.dart';
+import 'package:mycra_timesheet_app/generated/l10n.dart';
 
-class AuthenticationPage extends ConsumerWidget {
-// class AuthenticationPage extends ConsumerStatefulWidget {
-/*  const AuthenticationPage({super.key});
+class AuthenticationPage extends ConsumerStatefulWidget {
+  const AuthenticationPage({super.key});
 
   @override
-  ConsumerState createState() => _AuthenticationPageState();
+  ConsumerState<AuthenticationPage> createState() => _AuthenticationPageState();
 }
 
-class _AuthenticationPageState extends ConsumerState<AuthenticationPage> {*/
-  late String mail;
+class _AuthenticationPageState extends ConsumerState<AuthenticationPage> {
   final _formKey = GlobalKey<FormState>();
+  late String mail;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     var textTheme = Theme.of(context).textTheme;
     var colorScheme = Theme.of(context).colorScheme;
@@ -65,9 +65,7 @@ class _AuthenticationPageState extends ConsumerState<AuthenticationPage> {*/
                           ),
                         ),
                         TextFormField(
-                          onSaved: (newValue) {
-                            mail = newValue ?? '';
-                          },
+                          onSaved: (newValue) => setState(() => mail = newValue ?? ''),
                           initialValue: 'sofien.touati@proxym-it.com',
                           keyboardType: TextInputType.emailAddress,
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -76,7 +74,7 @@ class _AuthenticationPageState extends ConsumerState<AuthenticationPage> {*/
                                         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
                                     .hasMatch(value ?? '')
                                 ? null
-                                : 'Check your email';
+                                : S.of(context).checkYourEmail;
                           },
                           textInputAction: TextInputAction.next,
                           decoration: InputDecoration(
@@ -84,7 +82,7 @@ class _AuthenticationPageState extends ConsumerState<AuthenticationPage> {*/
                               borderRadius: BorderRadius.circular(100),
                             ),
                             filled: true,
-                            label: const Text('xxx@proxym-it.com or xxx@proxym.fr'),
+                            label: Text(S.of(context).mailPlaceHolder),
                             labelStyle: textTheme.bodyLarge?.copyWith(color: Colors.grey),
                             floatingLabelBehavior: FloatingLabelBehavior.never,
                           ),
@@ -96,7 +94,7 @@ class _AuthenticationPageState extends ConsumerState<AuthenticationPage> {*/
                         Padding(
                           padding: const EdgeInsets.only(left: 24.0, bottom: 8),
                           child: Text(
-                            'Password',
+                            S.of(context).password,
                             style: textTheme.titleMedium,
                           ),
                         ),
@@ -104,7 +102,7 @@ class _AuthenticationPageState extends ConsumerState<AuthenticationPage> {*/
                           keyboardType: TextInputType.visiblePassword,
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           validator: (value) {
-                            return value?.isNotEmpty == true ? null : 'please provide a password';
+                            return value?.isNotEmpty == true ? null : S.of(context).pleaseProvideAPassword;
                           },
                           decoration: InputDecoration(
                             border: OutlineInputBorder(

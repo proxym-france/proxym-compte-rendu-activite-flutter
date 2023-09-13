@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:mycra_timesheet_app/core/dio/logger_interceptor.dart';
-
+import 'package:talker_dio_logger/talker_dio_logger.dart';
 
 class DioFactory {
   final String _baseUrl;
@@ -14,8 +13,12 @@ class DioFactory {
         connectTimeout: const Duration(seconds: 5),
       );
 
-  Dio create() => Dio(_createBaseOption())
-    ..interceptors.addAll([
-      LoggerInterceptor(),
-    ]);
+  Dio create() {
+    return Dio(_createBaseOption())
+      ..interceptors.addAll([
+        TalkerDioLogger(
+          settings: const TalkerDioLoggerSettings(),
+        ),
+      ]);
+  }
 }

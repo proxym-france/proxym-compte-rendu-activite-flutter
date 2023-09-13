@@ -5,22 +5,25 @@ import 'package:mycra_timesheet_app/core/di/provider.dart';
 import 'package:mycra_timesheet_app/core/network/network_notifier.dart';
 import 'package:mycra_timesheet_app/domain/entity/collab.dart';
 import 'package:mycra_timesheet_app/domain/repository/collab_repo.dart';
+import 'package:talker_flutter/talker_flutter.dart';
 
 final goRouterNotifierProvider = ChangeNotifierProvider<GoRouterNotifier>((ref) {
-  return GoRouterNotifier(ref, ref.read(collabRepoProvider))..init();
+  return GoRouterNotifier(ref, ref.read(collabRepoProvider), ref.read(talkerProvider))..init();
 });
 
 class GoRouterNotifier extends ChangeNotifier {
   final ChangeNotifierProviderRef ref;
   late RouterStateModel state;
 
-  GoRouterNotifier(this.ref, this.collabRepo);
+  GoRouterNotifier(this.ref, this.collabRepo, this.talker);
+
+  final Talker talker;
 
   final CollabRepo collabRepo;
 
   Future<void> init() async {
     state = RouterStateModel.initial();
-    state = state.copyWith(isOnline: ref.watch(connectivityStateProvider) != NetworkStatus.NONE);
+    state = state.copyWith(isOnline: ref.watch(connectivityStateProvider) != NetworkStatus.none);
 
     await checkIsLoggedIn();
   }
@@ -29,11 +32,11 @@ class GoRouterNotifier extends ChangeNotifier {
     await collabRepo.getSavedCollab().then((value) {
       state = state.copyWith(isLoggedIn: value != null, isAdmin: value?.isAdmin, activeUser: value);
       FlutterNativeSplash.remove();
-      print('collab was fetch : $value');
+      talker.error('collab was fetch : $value');
 
       return notifyListeners();
     }).onError((error, stackTrace) {
-      print(error);
+      (error);
       state = state.copyWith(isLoggedIn: false, isAdmin: false, activeUser: null);
       return notifyListeners();
     });

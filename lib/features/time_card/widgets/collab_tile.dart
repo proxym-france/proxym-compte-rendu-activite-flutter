@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mycra_timesheet_app/domain/entity/collab.dart';
-import 'package:mycra_timesheet_app/features/time_card/widgets/short_name_circle_avatar.dart';
+import 'package:mycra_timesheet_app/features/common/widget/short_name_tile_item.dart';
 
 class CollabTile extends StatelessWidget {
   const CollabTile({
@@ -17,16 +17,12 @@ class CollabTile extends StatelessWidget {
   final Color color;
 
   @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      onTap: onTap,
-      title: Text(collab.fullName),
-      subtitle: Text(collab.email),
-      leading: ShortNameCircleAvatar(
+  Widget build(BuildContext context) => ShortNameTileItem(
+        title: collab.fullName,
         shortName: collab.shortName,
         color: color,
-      ),
-      trailing: trailing,
-    );
-  }
+        subtitle: collab.email,
+        onTap: onTap,
+        trailing: trailing,
+      );
 }

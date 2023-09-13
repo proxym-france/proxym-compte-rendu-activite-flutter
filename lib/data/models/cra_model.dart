@@ -1,16 +1,13 @@
 import 'dart:convert';
 
-import 'package:jiffy/jiffy.dart';
-import 'package:mycra_timesheet_app/data/models/absence_model.dart';
-import 'package:mycra_timesheet_app/data/models/activity_model.dart';
+import 'package:mycra_timesheet_app/data/models/base_cra_model.dart';
 import 'package:mycra_timesheet_app/data/models/collab_model.dart';
-import 'package:mycra_timesheet_app/data/models/holiday_model.dart';
 
 class CraModel {
   final List<HolidayModel> holidays;
   final List<AbsenceModel> absences;
   final List<ActivityModel> activites;
-  final List<DateTime> available;
+  final List<AvailableModel> available;
   final int etat;
   final String status;
   final int id;
@@ -37,7 +34,7 @@ class CraModel {
     List<HolidayModel>? holidays,
     List<AbsenceModel>? absences,
     List<ActivityModel>? activites,
-    List<DateTime>? available,
+    List<AvailableModel>? available,
     int? etat,
     String? status,
     int? id,
@@ -68,7 +65,7 @@ class CraModel {
         holidays: List<HolidayModel>.from(json["_holidays"].map((x) => HolidayModel.fromJson(x))),
         absences: List<AbsenceModel>.from(json["_absences"].map((x) => AbsenceModel.fromJson(x))),
         activites: List<ActivityModel>.from(json["_activites"].map((x) => ActivityModel.fromJson(x))),
-        available: List<DateTime>.from(json["availableDates"].map((x) => Jiffy.parse(x).dateTime)),
+        available: List<AvailableModel>.from(json["availableDates"].map((x) => AvailableModel.fromJson(x))),
         etat: json["_etat"],
         status: json["_status"],
         id: json["_id"],

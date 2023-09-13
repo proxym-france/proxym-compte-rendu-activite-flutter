@@ -11,5 +11,17 @@
     "placeholders": {
       "craFilters": {}
     }
-  }
+  },
+  "save": "Save",
+  "selectDate": "Select Date",
+  "selectAnActivity": "Select an activity",
+  "addActivity": "Add Activity",
+  "fillCra": "Fill Cra",
+  "unkownError": "Unkown Error",
+  "password": "Password",
+  "pleaseProvideAPassword": "please provide a password",
+  "checkYourEmail": "Check your email",
+  "mailPlaceHolder": "xxx@proxym-it.com or xxx@proxym.fr",
+  "available": "Available"
+
 }

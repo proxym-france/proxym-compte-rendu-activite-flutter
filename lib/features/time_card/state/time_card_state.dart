@@ -1,7 +1,7 @@
 import 'package:mycra_timesheet_app/core/utils/state.dart';
-import 'package:mycra_timesheet_app/domain/entity/CraCardModel.dart';
-import 'package:mycra_timesheet_app/domain/entity/Timecard.dart';
 import 'package:mycra_timesheet_app/domain/entity/collab.dart';
+import 'package:mycra_timesheet_app/domain/entity/cra_card_model.dart';
+import 'package:mycra_timesheet_app/domain/entity/timecard.dart';
 import 'package:mycra_timesheet_app/features/time_card/state/time_card_filter.dart';
 
 class TimeCardStateModel {

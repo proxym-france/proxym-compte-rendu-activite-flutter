@@ -11,7 +11,6 @@ class FilterChips extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var colorScheme = Theme.of(context).colorScheme;
-    var textTheme = Theme.of(context).textTheme;
     var timecardConstoller = ref.watch(timeCardNotifierProvider);
     return ListView.separated(
       itemCount: TimecardFilter.values.length,

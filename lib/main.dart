@@ -4,6 +4,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:mycra_timesheet_app/core/di/logger_observer.dart';
 import 'package:mycra_timesheet_app/core/route/route_provider.dart';
 import 'package:mycra_timesheet_app/core/theme/theme_mode_provider.dart';
 import 'package:mycra_timesheet_app/data/models/type/collab_type.dart';
@@ -18,7 +19,10 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(CollabTypeAdapter());
 
-  runApp(const ProviderScope(child: MyApp()));
+  runApp(ProviderScope(
+    observers: [LoggerObserver()],
+    child: const MyApp(),
+  ));
   FlutterError.demangleStackTrace = (StackTrace stack) {
     if (stack is stack_trace.Trace) return stack.vmTrace;
     if (stack is stack_trace.Chain) return stack.toTrace().vmTrace;
@@ -35,10 +39,15 @@ class MyApp extends ConsumerWidget {
     final themeMode = ref.watch(themeModeProvider);
     final router = ref.watch(goRouterProvider);
     final theme = ThemeData(
-      colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40))),
       useMaterial3: true,
     );
-    final darkTheme = ThemeData.dark(useMaterial3: true);
+    final darkTheme = ThemeData(
+      useMaterial3: true,
+      brightness: Brightness.dark,
+      floatingActionButtonTheme: FloatingActionButtonThemeData(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40))),
+    );
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Oh Crapp',
@@ -49,8 +58,8 @@ class MyApp extends ConsumerWidget {
         GlobalWidgetsLocalizations.delegate
       ],
       supportedLocales: S.delegate.supportedLocales,
-      theme: theme.copyWith(textTheme: GoogleFonts.montserratTextTheme(theme.textTheme)),
-      darkTheme: darkTheme.copyWith(textTheme: GoogleFonts.montserratTextTheme(darkTheme.textTheme)),
+      theme: theme.copyWith(textTheme: GoogleFonts.robotoTextTheme(theme.textTheme)),
+      darkTheme: darkTheme.copyWith(textTheme: GoogleFonts.robotoTextTheme(darkTheme.textTheme)),
       themeMode: themeMode.themeMode,
       routeInformationParser: router.routeInformationParser,
       routeInformationProvider: router.routeInformationProvider,
@@ -72,7 +81,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return TimeCardList();
+    return const TimeCardList();
     // return AuthenticationPage();
   }
 }

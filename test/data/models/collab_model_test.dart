@@ -4,8 +4,8 @@ import 'package:mycra_timesheet_app/data/models/collab_model.dart';
 import 'package:mycra_timesheet_app/data/models/role_model.dart';
 
 void main() {
-  final testCollab = CollabModel(name: 'test', lastName: 'lastName', email: 'email@email.com', role: RoleModel.collab);
-  final testCollabWithoutLastName = CollabModel(name: 'test', lastName: '', email: 'email@email.com', role: RoleModel.collab);
+  const testCollab = CollabModel(name: 'test', lastName: 'lastName', email: 'email@email.com', role: RoleModel.collab);
+  const testCollabWithoutLastName = CollabModel(name: 'test', lastName: '', email: 'email@email.com', role: RoleModel.collab);
 
   test('should be a subclass of Equatable', () async {
     expect(testCollab, isA<Equatable>());
